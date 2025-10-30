@@ -1,9 +1,9 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import Datepicker from './Datepicker.vue'
 import jsPDF from 'jspdf'
-import html2canvas from 'html2canvas'
-
+import Input from './Input.vue'
+import { initFlowbite } from 'flowbite'
 const name = ref('')
 const description = ref('')
 const habits = ref([])
@@ -114,6 +114,9 @@ const uncompleteHabit = (index) => {
   habit.completed = false
   habit.progress = 0
 }
+onMounted(() => {
+  initFlowbite()
+})
 </script>
 
 <template>
@@ -121,30 +124,24 @@ const uncompleteHabit = (index) => {
     <RouterView />
     <h2 class="text-[40px] text-[#249CFF] font-semibold text-left mb-6">Your Habits</h2>
 
-    <div v-if="showForm" class="flex flex-wrap items-center gap-4 mb-8">
-      <input
-        v-model="name"
-        class="flex-1 min-w-[180px] border border-[#249CFF] text-[16px] text-[#249cffa2] px-4 py-2 rounded-full outline-none"
-        placeholder="Name for a Habit..."
-      />
+    <form v-if="showForm" class="max-w-sm mx-auto">
+      <Input v-model="name" :label="'Name for a habit'" :placeholder="'workout more'" />
 
       <Datepicker ref="datepicker" />
 
-      <input
+      <Input
         v-model="description"
-        class="flex-1 min-w-[200px] border border-[#249CFF] text-[16px] text-[#249cffa2] px-4 py-2 rounded-full outline-none"
-        type="text"
-        placeholder="Description"
+        :label="'Description for a habit'"
+        :placeholder="'2 sets of pushups 2x a day'"
       />
-
       <button
         @click="addHabit"
-        class="text-white text-[20px] px-6 py-2 rounded-full bg-[#249CFF] hover:bg-[#1A86E0] transition"
+        type="submit"
+        class="text-white bg-[#249CFF] hover:bg-[#249CFF] focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       >
         Add
       </button>
-    </div>
-
+    </form>
     <button
       v-else
       @click="showForm = true"

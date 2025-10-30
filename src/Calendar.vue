@@ -1,19 +1,35 @@
 <template>
   <main class="flex-1 p-8">
     <h2 class="text-[40px] text-[#249CFF] font-semibold text-left mb-6">Calendar</h2>
+    <div ref="calendarEl" class="calendar"></div>
   </main>
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue'
 import { Calendar } from '@fullcalendar/core'
 import dayGridPlugin from '@fullcalendar/daygrid'
 
-const calendarEl = document.getElementById('calendar')
+const calendarEl = ref(null)
 
-const calendar = new Calendar(calendarEl, {
-  plugins: [dayGridPlugin],
-  initialView: 'dayGridMonth',
+onMounted(() => {
+  const calendar = new Calendar(calendarEl.value, {
+    plugins: [dayGridPlugin],
+    initialView: 'dayGridMonth',
+  })
+  calendar.render()
 })
-
-calendar.render()
 </script>
+<style>
+.calendar {
+  max-width: 900px;
+  margin: 0 auto;
+  color: #249cff;
+}
+
+.button {
+  background-color: #249cff;
+  color: white;
+  border: none;
+}
+</style>
