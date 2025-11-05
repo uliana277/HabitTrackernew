@@ -19,7 +19,7 @@ onMounted(() => {
       v-model="model"
       type="name"
       id="name"
-      class="flex-1 bg-white border border-[#249CFF] text-[#4ba9f598] text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      class="flex-1 bg-white border border-[#249CFF] text-[#75b9f0c4] text-sm rounded-lg focus:ring-blue-300 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       :placeholder="props.placeholder"
       required
     />
